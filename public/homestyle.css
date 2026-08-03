@@ -1,0 +1,182 @@
+* {
+    background-color: #0E1113;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.25rem;
+
+    border-bottom: 2px solid gray;
+}
+
+.logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.7rem;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.serach {
+    border: 2px solid red;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    width: 30rem;
+    padding: 0.2rem 0.5rem;
+}
+
+.serach-logo {
+    height: 2rem;
+    width: 2rem;
+
+}
+
+.serach-logo img {
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.input-field {
+    width: 92%;
+}
+
+.input-field input {
+    height: 1.35rem;
+    width: 100%;
+    color: white;
+    background-color: #0E1113;
+    margin-left: 0.25rem;
+    text-align: center;
+    border: none;
+}
+
+.input-field input:active {
+    border: none;
+}
+
+.head-tools {
+    display: flex;
+    align-items: center;
+}
+
+.head-tools i {
+    font-size: 1.2rem;
+    margin-left: 0.35rem;
+    color: white;
+}
+
+.head-tools a {
+    color: white;
+    font-size: 1.2rem;
+    margin: 0 0.25rem;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.posts-container {
+    margin: 0.5rem 0;
+}
+
+.post {
+    border-bottom: 1px solid gray;
+    margin-bottom: 1rem;
+}
+
+.post-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+}
+
+.avatar img {
+    width: 2.25rem;
+    border-radius: 50%;
+}
+
+.avatar a {
+    margin: 0 0.5rem;
+    color: #B7CAD4;
+    font-size: 16px;
+}
+
+.avatar p {
+    color: #B7CAD4;
+    font-size: 13px;
+}
+
+.post-head-tool {
+    display: flex;
+    align-items: center;
+}
+
+.post-head-tool button {
+    padding: 0.25rem 0.75rem;
+    border: none;
+    border-radius: 0.75rem;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.post-head-tool i {
+    color: white;
+    margin: 0 0.55rem;
+    cursor: pointer;
+}
+
+.post-title {
+    margin: 0.35rem 0;
+}
+
+.post-title a {
+    color: white;
+    font-size: 1.25rem;
+    letter-spacing: 0.75px;
+}
+
+.post-image img {
+    width: 45rem;
+}
+
+.post-activities {
+    display: flex;
+    align-items: center;
+}
+
+.post-activities i {
+    background-color: #2A3236;
+}
+
+.post-activities div {
+    border-radius: 1rem;
+    padding: 0.35rem 0.65rem;
+    margin: 0.35rem;
+    background-color: #2A3236;
+    color: white;
+    cursor: pointer;
+}
+
+.delete a {
+    color: white;
+     background-color: #2A3236;
+}
