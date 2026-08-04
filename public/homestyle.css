@@ -6,6 +6,7 @@
 
 a{
     text-decoration: none;
+    color: white;
 }
 
 header {
@@ -88,6 +89,7 @@ main {
 }
 
 .posts-container {
+     width: 45rem;
     margin: 0.5rem 0;
 }
 
@@ -115,7 +117,7 @@ main {
 .avatar a {
     margin: 0 0.5rem;
     color: #B7CAD4;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .avatar p {
@@ -150,7 +152,7 @@ main {
 
 .post-title a {
     color: white;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     letter-spacing: 0.75px;
 }
 
@@ -179,4 +181,8 @@ main {
 .delete a {
     color: white;
      background-color: #2A3236;
+}
+
+.share a {
+    background-color: #2A3236;
 }
