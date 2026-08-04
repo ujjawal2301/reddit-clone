@@ -66,13 +66,16 @@
                     <div class="share">
                         <a href="/posts/<%= post.id %>/edit">
                             <i class="fa-solid fa-share"></i>
-                           Edit
+                            Edit
                         </a>
                     </div>
-                    <div class="delete">
-                        <i class="fa-regular fa-trash-can"></i>
-                        <a href="#">Delete</a>
-                    </div>
+                    <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+                        <div class="delete">
+                            <i class="fa-regular fa-trash-can"></i>
+                            <!-- <a href="#">Delete</a> -->
+                             <button>Delete</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -58,8 +58,12 @@ app.post("/posts", (req, res) => {
 app.patch("/posts/:id", (req, res) => {
     let { id } = req.params;
     let newContent = req.body.content;
+    let source = req.body.src;
+    let newTitle = req.body.title;
     let post = posts.find((p) => id === p.id);
     post.content = newContent;
+    post.src = source;
+    post.title = newTitle;
      res.render("detail.ejs", { post });
 });
 
@@ -73,6 +77,12 @@ app.get("/posts/:id", (req, res) => {
     let { id } = req.params;
     let post = posts.find((p) => id === p.id);
     res.render("detail.ejs", { post });
+});
+
+app.delete("/posts/:id", (req,res) => {
+    let {id} = req.params;
+    posts = posts.filter((p) => p.id !== id);
+    res.redirect("/posts");
 });
 
 app.listen(port, () => {

@@ -29,15 +29,19 @@
         <div class="post">
             <div class="post-head">
                 <div class="username">
-                    <h2><%= post.username %></h2>
+                    <h2>
+                        <%= post.username %>
+                    </h2>
                 </div>
 
             </div>
-            <div class="post-title">
-                <textarea name="title" rows="3" cols="63" placeholder="Enter post Title"><%= post.title %></textarea>
-
-            </div>
             <form method="post" action="/posts/<%= post.id %>?_method=PATCH">
+                <div class="post-title">
+                    <textarea name="title" rows="3" cols="63"
+                        placeholder="Enter post Title"><%= post.title %></textarea>
+
+                </div>
+
                 <div class="post-content">
                     <textarea name="content" rows="5" cols="63"
                         placeholder="Enter post Content"><%= post.content %></textarea>
