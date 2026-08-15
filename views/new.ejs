@@ -31,20 +31,17 @@
             <form action="/posts" method="post">
                 <div class="post-head">
                     <div class="username">
-                        <textarea name="username" class="username" rows="2" cols="30"
-                            placeholder="Enter Username"></textarea>
+                        <textarea name="post[username]" class="username" rows="2" cols="30" placeholder="Enter Username"></textarea>
                     </div>
-
                 </div>
                 <div class="post-title">
-                    <textarea name="title" rows="3" cols="63" placeholder="Enter post Title"></textarea>
-
+                    <textarea name="post[title]" rows="3" cols="63" placeholder="Enter post Title"></textarea>
                 </div>
                 <div class="post-content">
-                    <textarea name="content" rows="5" cols="63" placeholder="Enter post Content"></textarea>
+                    <textarea name="post[content]" rows="5" cols="63" placeholder="Enter post Content"></textarea>
                 </div>
                 <div class="post-image">
-                    <textarea name="src" rows="3" cols="73" placeholder="Enter new Image URL"></textarea>
+                    <textarea name="post[url]" rows="3" cols="73" placeholder="Enter new Image URL"></textarea>
                 </div>
                 <button>Submit</button>
             </form>

@@ -30,24 +30,23 @@
             <div class="post-head">
                 <div class="username">
                     <h2>
-                        <%= post.username %>
+                        <%= postData.username %>
                     </h2>
                 </div>
-
             </div>
-            <form method="post" action="/posts/<%= post.id %>?_method=PATCH">
+            <form method="post" action="/posts/<%= postData.id %>?_method=PATCH">
                 <div class="post-title">
-                    <textarea name="title" rows="3" cols="63"
-                        placeholder="Enter post Title"><%= post.title %></textarea>
-
+                    <textarea name="post[title]" rows="3" cols="63"
+                        placeholder="Enter post Title"><%= postData.title %></textarea>
                 </div>
 
                 <div class="post-content">
-                    <textarea name="content" rows="5" cols="63"
-                        placeholder="Enter post Content"><%= post.content %></textarea>
+                    <textarea name="post[content]" rows="5" cols="63"
+                        placeholder="Enter post Content"><%= postData.content %></textarea>
                 </div>
                 <div class="post-image">
-                    <textarea name="src" rows="3" cols="73" placeholder="Enter new Image URL"><%= post.src %></textarea>
+                    <textarea name="post[url]" rows="5" cols="96"
+                        placeholder="Enter new Image URL"><%= postData.url %></textarea>
                 </div>
                 <button>Submit</button>
             </form>

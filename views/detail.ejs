@@ -33,7 +33,7 @@
                     <div class="avatar">
                         <img
                             src="https://styles.redditmedia.com/t5_2qhsa/styles/communityIcon_zp89zqe7cdlb1.png?width=128&frame=1&auto=webp&s=0fc12bdbd19074cf90bfc593e72ecdac285402fc">
-                        <a href="#">@<%= post.username %></a>
+                        <a href="#">@<%= postData.username %></a>
                         <p>7 hr. ago</p>
                     </div>
                     <div class="post-head-tool">
@@ -43,16 +43,16 @@
                 </div>
                 <div class="post-title">
                     <a href="#">
-                        <%= post.title %>
+                        <%= postData.title %>
                     </a>
                 </div>
                 <div class="post-content">
                     <p>
-                        <%= post.content %>
+                        <%= postData.content %>
                     </p>
                 </div>
                 <div class="post-image">
-                    <img src=<%=post.src %>>
+                    <img src=<%=postData.url %>>
                 </div>
                 <div class="post-activities">
                     <div class="likes">
@@ -64,12 +64,12 @@
                         <i class="fa-regular fa-comment"></i>
                     </div>
                     <div class="share">
-                        <a href="/posts/<%= post.id %>/edit">
+                        <a href="/posts/<%= postData.id %>/edit">
                             <i class="fa-solid fa-share"></i>
                             Edit
                         </a>
                     </div>
-                    <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+                    <form action="/posts/<%= postData.id %>?_method=DELETE" method="post">
                         <div class="delete">
                             <i class="fa-regular fa-trash-can"></i>
                             <!-- <a href="#">Delete</a> -->
