@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="/homestyle.css">
+    <link rel="stylesheet" href="/new.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css"
+        integrity="sha512-ApSLB1Pd3/bZN8fWB/RG9YhN/7bd9Hkf3AGaE2mPfebjrxagjuBtx2GcgdqIlJkUzwylBo61r9Xa9NmgBI0swA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <%- include("../includes/navbar.ejs") %>
+        <main>
+            <div class="post">
+                <div class="post-head">
+                    <div class="username">
+                        <h2>
+                            <%= postData.username %>
+                        </h2>
+                    </div>
+                </div>
+                <form method="post" action="/posts/<%= postData.id %>?_method=PATCH">
+                    <div class="post-title">
+                        <textarea name="post[title]" rows="3" cols="63"
+                            placeholder="Enter post Title"><%= postData.title %></textarea>
+                    </div>
+
+                    <div class="post-content">
+                        <textarea name="post[content]" rows="5" cols="63"
+                            placeholder="Enter post Content"><%= postData.content %></textarea>
+                    </div>
+                    <div class="post-image">
+                        <textarea name="post[url]" rows="5" cols="96"
+                            placeholder="Enter new Image URL"><%= postData.url %></textarea>
+                    </div>
+                    <button>Submit</button>
+                </form>
+
+            </div>
+        </main>
+
+</body>
+
+</html>

@@ -7,14 +7,16 @@ const { title } = require("process");
 const { v4: uuidv4 } = require("uuid");
 const methodOverride = require('method-override');
 const Post = require("./models/posts");
+const ejsMate = require("ejs-mate");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views/pages"));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method'));
+app.engine("ejs", ejsMate);
 
 main()
     .then((res) => console.log("Connection Succesful"))

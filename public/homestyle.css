@@ -4,18 +4,17 @@
     padding: 0;
 }
 
-a{
+a {
     text-decoration: none;
     color: white;
 }
 
-header {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.25rem;
-
-    border-bottom: 2px solid gray;
+    padding: 0.45rem 0.25rem;
+    border-bottom: 1px solid gray;
 }
 
 .logo a {
@@ -26,7 +25,7 @@ header {
     font-weight: 600;
 }
 
-.serach {
+.search {
     border: 2px solid red;
     border-radius: 1rem;
     display: flex;
@@ -35,13 +34,13 @@ header {
     padding: 0.2rem 0.5rem;
 }
 
-.serach-logo {
+.search-logo {
     height: 2rem;
     width: 2rem;
 
 }
 
-.serach-logo img {
+.search-logo img {
     width: 100%;
     border-radius: 0.5rem;
 }
@@ -89,7 +88,7 @@ main {
 }
 
 .posts-container {
-     width: 45rem;
+    width: 45rem;
     margin: 0.5rem 0;
 }
 
@@ -182,9 +181,66 @@ main {
     padding: 0.25rem;
     margin: 0;
     color: white;
-     background-color: #2A3236;
+    background-color: #2A3236;
 }
 
 .share a {
     background-color: #2A3236;
 }
+
+/* New Page */
+/* 
+.post-title textarea {
+    color: white;
+    font-size: 1.25rem;
+    letter-spacing: 0.75px;
+}
+
+.post-content textarea {
+    color: white;
+    font-size: 1.25rem;
+    letter-spacing: 0.75px;
+}
+
+.post-content p {
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+}
+
+.post-image input {
+    height: 1.2rem;
+    width: 10.5rem;
+}
+
+.post-image textarea {
+    margin: 0.5rem 0;
+    padding: 0.15rem 0 0 0.25rem;
+    color: white;
+}
+
+textarea {
+    color: white;
+}
+
+button {
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border: none;
+    border-radius: 0.75rem;
+    color: black;
+    background-color: white;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.edit-title h2 {
+    color: white;
+    letter-spacing: 1px;
+}
+
+.username {
+    margin: 0.5rem 0;
+    color: white;
+} */
