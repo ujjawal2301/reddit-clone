@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views/pages"));
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride('_method'));
 app.engine("ejs", ejsMate);
@@ -28,11 +28,11 @@ async function main() {
 
 app.get("/posts", async (req, res) => {
     let posts = await Post.find({});
-    res.render("head.ejs", { posts });
+    res.render("Pages/head.ejs", { posts });
 });
 
 app.get("/posts/new", (req, res) => {
-    res.render("new.ejs");
+    res.render("Pages/new.ejs");
 });
 
 // Create Route
@@ -52,14 +52,14 @@ app.patch("/posts/:id", async (req, res) => {
 app.get("/posts/:id/edit", async (req, res) => {
     let { id } = req.params;
     let postData = await Post.findById(id);
-    res.render("edit.ejs", { postData });
+    res.render("Pages/edit.ejs", { postData });
 });
 
 // View Route
 app.get("/posts/:id", async (req, res) => {
     let { id } = req.params;
     let postData = await Post.findById(id);
-    res.render("detail.ejs", { postData });
+    res.render("Pages/detail.ejs", { postData });
 });
 
 // Delete Route

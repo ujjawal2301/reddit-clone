@@ -1,5 +1,5 @@
 * {
-    background-color: #0E1113;
+    background-color: #0E1113 !important;
     margin: 0;
     padding: 0;
 }
@@ -81,7 +81,7 @@ nav {
     text-decoration: none;
 }
 
-main {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
