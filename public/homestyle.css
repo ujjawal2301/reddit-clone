@@ -5,7 +5,7 @@
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
     color: white;
 }
 
@@ -105,8 +105,8 @@ nav {
 }
 
 .avatar {
-    display: flex;
-    align-items: center;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .avatar img {
@@ -123,6 +123,7 @@ nav {
 .avatar p {
     color: #B7CAD4;
     font-size: 13px;
+    margin-bottom: 0 !important;
 }
 
 .post-head-tool {
@@ -135,7 +136,7 @@ nav {
     border: none;
     border-radius: 0.75rem;
     color: black;
-    background-color: white;
+    background-color: white !important;
     cursor: pointer;
     font-weight: bolder;
 }
@@ -181,16 +182,40 @@ nav {
 .delete button {
     padding: 0.25rem;
     margin: 0;
-    color: white;
-    background-color: #2A3236;
+    color: black;
+    background-color: red !important;
+    border: none !important;
+    border-radius: 0.5rem !important;
+ font-weight: 700;
+}
+
+.delete i {
+    background-color: red !important;
 }
 
 .share a {
-    background-color: #2A3236;
+    padding: 0.25rem 0.75rem;
+    border: none;
+    border-radius: 0.75rem;
+    color: black;
+    background-color: white !important;
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.share i {
+    color: black !important;
+    background-color: white !important;
 }
 
 textarea {
     color: grey !important;
+}
+
+/* Detail page */
+
+.post-content {
+    color: white !important;
 }
 
 /* .mr {

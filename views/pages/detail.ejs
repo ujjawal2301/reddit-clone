@@ -15,7 +15,7 @@
             </div>
             <div class="post-title">
                 <a href="#">
-                    <%= postData.title %>
+                   <b> <%= postData.title %></b>
                 </a>
             </div>
             <div class="post-content">
@@ -43,9 +43,7 @@
                 </div>
                 <form action="/posts/<%= postData.id %>?_method=DELETE" method="post">
                     <div class="delete">
-                        <i class="fa-regular fa-trash-can"></i>
-                        <!-- <a href="#">Delete</a> -->
-                        <button>Delete</button>
+                        <button><i class="fa-regular fa-trash-can"></i>Delete</button>
                     </div>
                 </form>
             </div>
