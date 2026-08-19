@@ -189,6 +189,10 @@ nav {
     background-color: #2A3236;
 }
 
+textarea {
+    color: grey !important;
+}
+
 /* .mr {
     margin-right: 5rem;
 } */
