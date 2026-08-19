@@ -1,21 +1,33 @@
 <% layout("/layouts/boilerplate") %>
-    <div class="post">
-        <form action="/posts" method="post">
-            <div class="post-head">
-                <div class="username">
-                    <textarea name="post[username]" class="username" rows="2" cols="30"
-                        placeholder="Enter Username"></textarea>
+    <div class="row mt-2 text-white">
+        <div class="col-12 mr">
+            <br>
+            <h2>Create New List</h2>
+            <form action="/posts" method="post">
+                <div class="mb-3 ">
+                    <label for="username" class="for-label">Username</label>
+                    <textarea name="post[username]" class="form-control text-white" rows="1" cols="30"></textarea>
                 </div>
-            </div>
-            <div class="post-title">
-                <textarea name="post[title]" rows="3" cols="63" placeholder="Enter post Title"></textarea>
-            </div>
-            <div class="post-content">
-                <textarea name="post[content]" rows="5" cols="63" placeholder="Enter post Content"></textarea>
-            </div>
-            <div class="post-image">
-                <textarea name="post[url]" rows="3" cols="73" placeholder="Enter new Image URL"></textarea>
-            </div>
-            <button>Submit</button>
-        </form>
+
+                <div class="mb-3">
+                    <label for="title" class="for-label">Title</label>
+                    <textarea name="post[title]" rows="2" cols="63"
+                        class="form-control text-white"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="content" class="for-label">Content</label>
+                    <textarea name="post[content]" rows="4" cols="90" placeholder="Enter post Content"
+                        class="form-control text-white"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="url" class="for-label">Image Link / URL</label>
+                    <textarea name="post[url]" rows="2" cols="73" placeholder="Enter new Image URL"
+                        class="form-control text-white"></textarea>
+                </div>
+
+                <button class="btn btn-danger">Submit</button>
+            </form>
+        </div>
     </div>

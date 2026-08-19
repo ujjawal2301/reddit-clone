@@ -32,6 +32,7 @@ nav {
     align-items: center;
     width: 30rem;
     padding: 0.2rem 0.5rem;
+    margin-left: 2rem;
 }
 
 .search-logo {
@@ -187,6 +188,10 @@ nav {
 .share a {
     background-color: #2A3236;
 }
+
+/* .mr {
+    margin-right: 5rem;
+} */
 
 /* New Page */
 /* 
