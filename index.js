@@ -51,15 +51,15 @@ app.patch("/posts/:id", async (req, res) => {
 // Edit Route
 app.get("/posts/:id/edit", async (req, res) => {
     let { id } = req.params;
-    let postData = await Post.findById(id);
-    res.render("Pages/edit.ejs", { postData });
+    let post = await Post.findById(id);
+    res.render("Pages/edit.ejs", { post });
 });
 
 // View Route
 app.get("/posts/:id", async (req, res) => {
     let { id } = req.params;
-    let postData = await Post.findById(id);
-    res.render("Pages/detail.ejs", { postData });
+    let post = await Post.findById(id);
+    res.render("Pages/detail.ejs", { post });
 });
 
 // Delete Route

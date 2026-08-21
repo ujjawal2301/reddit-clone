@@ -4,22 +4,22 @@
             <br>
             <h2>Edit the Post</h2>
 
-            <form method="post" action="/posts/<%= postData.id %>?_method=PATCH">
+            <form method="post" action="/posts/<%= post.id %>?_method=PATCH">
                 <div class="mb-3">
                     <label for="title" class="for-label">New Title</label>
                     <textarea name="post[title]" rows="2" cols="63" placeholder="Enter new Title"
-                        class="form-control"><%= postData.title %></textarea>
+                        class="form-control"><%= post.title %></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="content" class="for-label">New Content</label>
                     <textarea name="post[content]" rows="4" cols="63" placeholder="Enter post Content"
-                        class="form-control"><%= postData.content %></textarea>
+                        class="form-control"><%= post.content %></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="url" class="for-label">New Image Link / URL</label>
                     <textarea name="post[url]" rows="3" cols="96" placeholder="Enter new Image URL"
-                        class="form-control"><%= postData.url %></textarea>
+                        class="form-control"><%= post.url %></textarea>
                 </div>
                 <button class="btn btn-danger">Edit</button>
             </form>
