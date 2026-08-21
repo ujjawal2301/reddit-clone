@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
 }
@@ -85,8 +86,14 @@ nav {
     text-decoration: none;
 }
 
-.container {
+.container1 {
+    display: flex !important;
+}
+
+.container2 {
+    width: 100% !important;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -97,8 +104,11 @@ nav {
 }
 
 .post {
+    width: 48rem;
     border-bottom: 1px solid gray;
     margin-bottom: 1rem;
+    /* Temporary */
+    margin-right: 12rem;
 }
 
 .post-head {
@@ -161,7 +171,7 @@ nav {
 }
 
 .post-image img {
-    width: 45rem;
+    width: 100%;
 }
 
 .post-activities {
@@ -189,7 +199,7 @@ nav {
     background-color: red !important;
     border: none !important;
     border-radius: 0.5rem !important;
- font-weight: 700;
+    font-weight: 700;
 }
 
 .delete i {
@@ -225,6 +235,42 @@ textarea::placeholder {
     color: white !important;
 }
 
-/* .mr {
-    margin-right: 5rem;
-} */
+/* Sidebar */
+
+.sidebar {
+    padding: 1rem 1.2rem;
+    border-right: 1px solid gray;
+}
+
+.nav2 {
+    border-bottom: 0.5px solid grey !important;
+    padding-bottom: 0.5rem !important ;
+}
+
+.nav2 div {
+    padding: 0.65rem 0.25rem !important;
+    margin: 0.45rem 0 !important;
+}
+
+.nav2 div:hover {
+    border: 2px solid gray !important;
+    cursor: pointer;
+}
+
+.nav2 div a {
+    display: flex;
+    align-items: center;
+    color: white !important;
+}
+
+.nav2 div a p {
+    width: max-content !important;
+    margin: 0 !important;
+    margin-left: 0.35rem !important;
+}
+
+
+/* Center */
+.center {
+    margin: 0 20rem !important;
+}
