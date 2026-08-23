@@ -4,22 +4,31 @@
             <br>
             <h2>Edit the Post</h2>
 
-            <form method="post" action="/posts/<%= post.id %>?_method=PATCH">
+            <form method="post" action="/posts/<%= post.id %>?_method=PATCH" class="needs-validation" novalidate>
                 <div class="mb-3">
                     <label for="title" class="for-label">New Title</label>
-                    <textarea name="post[title]" rows="2" cols="63" placeholder="Enter new Title"
-                        class="form-control"><%= post.title %></textarea>
+                    <textarea name="post[title]" rows="2" cols="63" placeholder="Enter new Title" class="form-control"
+                        required><%= post.title %></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="content" class="for-label">New Content</label>
                     <textarea name="post[content]" rows="4" cols="63" placeholder="Enter post Content"
                         class="form-control"><%= post.content %></textarea>
+                    <div class="invalid-feedback">
+                        Content must be shorter!
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="url" class="for-label">New Image Link / URL</label>
-                    <textarea name="post[url]" rows="3" cols="96" placeholder="Enter new Image URL"
-                        class="form-control"><%= post.url %></textarea>
+                    <textarea name="post[url]" rows="3" cols="96" placeholder="Enter new Image URL" class="form-control"
+                        required><%= post.url %></textarea>
+                    <div class="invalid-feedback">
+                        Please enter a valid image Link!
+                    </div>
                 </div>
                 <button class="btn btn-danger">Edit</button>
             </form>

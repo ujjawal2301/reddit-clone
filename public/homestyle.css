@@ -6,6 +6,7 @@
 
 body {
     font-family: "Plus Jakarta Sans", sans-serif !important;
+     overflow: hidden !important;
 }
 
 a {
@@ -87,7 +88,9 @@ nav {
 }
 
 .container1 {
+    height: 100vh;
     display: flex !important;
+    padding-bottom: 2rem !important;
 }
 
 .container2 {
@@ -96,6 +99,8 @@ nav {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
+
 }
 
 .posts-container {
@@ -170,7 +175,12 @@ nav {
     letter-spacing: 0.75px;
 }
 
+.post-image {
+    height: 27rem !important;
+}
+
 .post-image img {
+    height: 100%;
     width: 100%;
 }
 
@@ -238,6 +248,7 @@ textarea::placeholder {
 /* Sidebar */
 
 .sidebar {
+    height: 100%;
     padding: 1rem 1.2rem;
     border-right: 1px solid gray;
 }
