@@ -8,6 +8,7 @@ const { v4: uuidv4 } = require("uuid");
 const methodOverride = require('method-override');
 const Post = require("./models/posts");
 const ejsMate = require("ejs-mate");
+const wrapAsync = require("./utils/wrapAsync");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -36,10 +37,10 @@ app.get("/posts/new", (req, res) => {
 });
 
 // Create Route
-app.post("/posts", async (req, res) => {
+app.post("/posts", wrapAsync(async (req, res) => {
     await Post.insertOne({ ...req.body.post });
     res.redirect("/posts");
-});
+}));
 
 // Update Route
 app.patch("/posts/:id", async (req, res) => {
