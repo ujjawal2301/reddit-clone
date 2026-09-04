@@ -5,6 +5,6 @@ module.exports.postSchema = joi.object({
         username:joi.string().required(),
         title: joi.string().required(),
         content: joi.string().required(),
-        image: joi.string().required(),
+        url: joi.string().required(),
     }).required(),
 });

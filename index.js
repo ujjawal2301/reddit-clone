@@ -6,11 +6,11 @@ const path = require("path");
 const { title } = require("process");
 const { v4: uuidv4 } = require("uuid");
 const methodOverride = require('method-override');
-const Post = require("./models/posts");
 const ejsMate = require("ejs-mate");
-const wrapAsync = require("./utils/wrapAsync");
+
+const posts = require("./routes/post");
+
 const ExpressError = require("./utils/ExpressError");
-const {postSchema} = require("./schema");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -29,58 +29,7 @@ async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/reddit-replica');
 }
 
-const validatePost = (req, res, next ) => {
-    let {error} = postSchema.validate(req.body);
-    if(error) {
-          let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();
-    }
-}
-
-app.get("/posts", wrapAsync(async (req, res) => {
-    let posts = await Post.find({});
-    res.render("Pages/head.ejs", { posts });
-}));
-
-app.get("/posts/new", (req, res) => {
-    res.render("Pages/new.ejs");
-});
-
-// Create Route
-app.post("/posts",validatePost, wrapAsync(async (req, res) => {
-    await Post.insertOne({ ...req.body.post });
-    res.redirect("/posts");
-}));
-
-// Update Route
-app.patch("/posts/:id",validatePost, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await Post.findByIdAndUpdate(id, { ...req.body.post });
-    res.redirect(`/posts/${id}`);
-}));
-
-// Edit Route
-app.get("/posts/:id/edit", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let post = await Post.findById(id);
-    res.render("Pages/edit.ejs", { post });
-}));
-
-// View Route
-app.get("/posts/:id", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let post = await Post.findById(id);
-    res.render("Pages/detail.ejs", { post });
-}));
-
-// Delete Route
-app.delete("/posts/:id", wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    let deletedPost = await Post.findByIdAndDelete(id);
-    res.redirect("/posts");
-}));
+app.use("/posts", posts);
 
 app.all("/{*splat}", (req,res,next) => {
     next(new ExpressError(404, "Page Not Found!"));
