@@ -7,6 +7,8 @@ const { title } = require("process");
 const { v4: uuidv4 } = require("uuid");
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const posts = require("./routes/post");
 
@@ -28,6 +30,26 @@ main()
 async function main() {
     await mongoose.connect('mongodb://127.0.0.1:27017/reddit-replica');
 }
+
+const sessionOptions = {
+    secret: "redditSecretCode",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 *60*60*1000,
+        maxAge: 7 * 24 *60*60*1000,
+        httpOnly: true
+    },
+};
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use((req,res,next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    next();
+});
 
 app.use("/posts", posts);
 
