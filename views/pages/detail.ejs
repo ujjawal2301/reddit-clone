@@ -15,7 +15,9 @@
             </div>
             <div class="post-title">
                 <a href="#">
-                   <b> <%= post.title %></b>
+                    <b>
+                        <%= post.title %>
+                    </b>
                 </a>
             </div>
             <div class="post-content">
@@ -46,6 +48,35 @@
                         <button><i class="fa-regular fa-trash-can"></i>Delete</button>
                     </div>
                 </form>
+            </div>
+            <div class="comment-section mb-4">
+                <form method="POST" action="/posts/<%= post.id %>/comments">
+                    <textarea name="user[comment]" cols="30" rows="3" placeholder="Join the conversation"
+                        class="form-control" required></textarea>
+                    <button class="btn btn-outline-primary">Comment</button>
+                </form>
+                <hr>
+                <% for(let content of post.comments) { %>
+                    <div class="d-flex text-white comment-card mt-2 mb-4">
+                        <img src="https://preview.redd.it/snoovatar/avatars/208f4cf6-6196-4678-8c7b-31da0cc87b7f-headshot.png?width=64&height=64&crop=smart&auto=webp&s=0045b8e979c5658d8deddb0bdd677230c0d7d7d4"
+                            class="rounded-circle" width="40" height="40">
+                        <div class="ms-3 border-start ps-4">
+                            <div>
+                                <strong>vip6599</strong>
+                                <small class="text-grey">· 18d ago</small>
+
+                            </div>
+
+                            <p class="mt-2 mb-2">
+                                <%= content.comment %>
+                            </p>
+                            <!-- "/posts/:id/comments/:commentId", -->
+                            <form action="/posts/<%= post.id %>/comments/<%= content._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
             </div>
         </div>
     </div>

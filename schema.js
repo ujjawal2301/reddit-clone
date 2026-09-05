@@ -8,3 +8,9 @@ module.exports.postSchema = joi.object({
         url: joi.string().required(),
     }).required(),
 });
+
+module.exports.commentSchema = joi.object({
+    user: joi.object({
+        comment: joi.string().required()
+    }).required(),
+});

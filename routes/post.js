@@ -56,11 +56,12 @@ router.get("/:id/edit", wrapAsync(async (req, res) => {
 // View Route
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let post = await Post.findById(id);
+    let post = await Post.findById(id).populate("comments");
     if (!post) {
         req.flash("error", "Post does not Exist");
         return res.redirect("/posts");
     }
+    console.log(post.comments);
     res.render("Pages/detail.ejs", { post });
 }));
 

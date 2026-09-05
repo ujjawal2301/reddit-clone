@@ -11,6 +11,7 @@ const session = require("express-session");
 const flash = require("connect-flash");
 
 const posts = require("./routes/post");
+const comments = require("./routes/comment");
 
 const ExpressError = require("./utils/ExpressError");
 
@@ -52,6 +53,7 @@ app.use((req,res,next) => {
 });
 
 app.use("/posts", posts);
+app.use("/posts/:id/comments", comments);
 
 app.all("/{*splat}", (req,res,next) => {
     next(new ExpressError(404, "Page Not Found!"));

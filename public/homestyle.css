@@ -307,3 +307,13 @@ textarea::placeholder {
     align-items: center;
     overflow-y: auto;
 }
+
+.comment-section textarea {
+    border-radius: 1rem;
+    padding: 0.75rem;
+    margin-bottom: 0.45rem;
+}
+
+.comment-card {
+
+}
