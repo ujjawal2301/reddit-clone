@@ -9,9 +9,13 @@ const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/users")
 
-const posts = require("./routes/post");
-const comments = require("./routes/comment");
+const postRouter = require("./routes/post");
+const commentRouter = require("./routes/comment");
+const userRouter = require("./routes/user");
 
 const ExpressError = require("./utils/ExpressError");
 
@@ -46,14 +50,22 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req,res,next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     next();
 });
 
-app.use("/posts", posts);
-app.use("/posts/:id/comments", comments);
+app.use("/posts", postRouter);
+app.use("/posts/:id/comments", commentRouter);
+app.use("/", userRouter);
 
 app.all("/{*splat}", (req,res,next) => {
     next(new ExpressError(404, "Page Not Found!"));
