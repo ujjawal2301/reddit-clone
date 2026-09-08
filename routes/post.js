@@ -4,6 +4,7 @@ const Post = require("../models/posts");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { postSchema } = require("../schema");
+const {isLoggedIn} = require("../middleware");
 
 
 const validatePost = (req, res, next) => {
@@ -23,19 +24,19 @@ router.get("/", wrapAsync(async (req, res) => {
 }));
 
 // New Route
-router.get("/new", (req, res) => {
+router.get("/new",isLoggedIn, (req, res) => {
     res.render("Pages/new.ejs");
 });
 
 // Create Route
-router.post("/", validatePost, wrapAsync(async (req, res) => {
+router.post("/",isLoggedIn, validatePost, wrapAsync(async (req, res) => {
     await Post.insertOne({ ...req.body.post });
     req.flash("success", "New Post Created!");
     res.redirect("/posts");
 }));
 
 // Update Route
-router.patch("/:id", validatePost, wrapAsync(async (req, res) => {
+router.patch("/:id",isLoggedIn, validatePost, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Post.findByIdAndUpdate(id, { ...req.body.post });
     req.flash("success", "Post Updated!");
@@ -43,7 +44,7 @@ router.patch("/:id", validatePost, wrapAsync(async (req, res) => {
 }));
 
 // Edit Route
-router.get("/:id/edit", wrapAsync(async (req, res) => {
+router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let post = await Post.findById(id);
     if (!post) {
@@ -66,7 +67,7 @@ router.get("/:id", wrapAsync(async (req, res) => {
 }));
 
 // Delete Route
-router.delete("/:id", wrapAsync(async (req, res) => {
+router.delete("/:id",isLoggedIn, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedPost = await Post.findByIdAndDelete(id);
     req.flash("success", "Post Deleted Succesfully!");
