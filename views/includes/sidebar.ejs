@@ -24,6 +24,7 @@
                 <p>Start New Community</p>
             </a>
         </div>
+     <%   if(!currUser) { %>
         <div class="nav-comm">
             <a href="/signup">
                 <i class="fa-solid fa-plus"></i>
@@ -36,12 +37,17 @@
                 <p>Login</p>
             </a>
         </div>
+
+      <%  } %>
+     <%   if(currUser) { %>
         <div class="nav-comm">
-            <a href="#">
+            <a href="/logout">
                 <i class="fa-solid fa-plus"></i>
                 <p>Log out</p>
             </a>
         </div>
+     <%   } %>
+
 
     </div>
     <div class="resources"></div>
