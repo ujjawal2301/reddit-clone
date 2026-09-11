@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../models/posts");
+const Comment = require("../models/comments");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { postSchema } = require("../schema");
-const {isLoggedIn} = require("../middleware");
+const { isLoggedIn } = require("../middleware");
 
 
 const validatePost = (req, res, next) => {
@@ -19,24 +20,27 @@ const validatePost = (req, res, next) => {
 
 // Index Route
 router.get("/", wrapAsync(async (req, res) => {
-    let posts = await Post.find({});
+    let posts = await Post.find({}).populate("owner");
     res.render("Pages/head.ejs", { posts });
 }));
 
 // New Route
-router.get("/new",isLoggedIn, (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("Pages/new.ejs");
 });
 
 // Create Route
-router.post("/",isLoggedIn, validatePost, wrapAsync(async (req, res) => {
-    await Post.insertOne({ ...req.body.post });
+router.post("/", isLoggedIn, validatePost, wrapAsync(async (req, res) => {
+    // await Post.insertOne({ ...req.body.post });
+    const newPost = new Post(req.body.post);
+    newPost.owner = req.user._id;
+    await newPost.save();
     req.flash("success", "New Post Created!");
     res.redirect("/posts");
 }));
 
 // Update Route
-router.patch("/:id",isLoggedIn, validatePost, wrapAsync(async (req, res) => {
+router.patch("/:id", isLoggedIn, validatePost, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Post.findByIdAndUpdate(id, { ...req.body.post });
     req.flash("success", "Post Updated!");
@@ -44,9 +48,9 @@ router.patch("/:id",isLoggedIn, validatePost, wrapAsync(async (req, res) => {
 }));
 
 // Edit Route
-router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn, wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let post = await Post.findById(id);
+    let post = await Post.findById(id).populate("owner");
     if (!post) {
         req.flash("error", "Post does not Exist");
         return res.redirect("/posts");
@@ -57,18 +61,20 @@ router.get("/:id/edit",isLoggedIn, wrapAsync(async (req, res) => {
 // View Route
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let post = await Post.findById(id).populate("comments");
+    let post = await Post.findById(id).populate("comments").populate("owner");
+    console.log(post);
     if (!post) {
         req.flash("error", "Post does not Exist");
         return res.redirect("/posts");
     }
-    console.log(post.comments);
+    // console.log(post.comments);
     res.render("Pages/detail.ejs", { post });
 }));
 
 // Delete Route
-router.delete("/:id",isLoggedIn, wrapAsync(async (req, res) => {
+router.delete("/:id", isLoggedIn, wrapAsync(async (req, res) => {
     let { id } = req.params;
+    await Comment.findByIdAndUpdate(id, { $pull: { comments: id } });
     let deletedPost = await Post.findByIdAndDelete(id);
     req.flash("success", "Post Deleted Succesfully!");
     res.redirect("/posts");

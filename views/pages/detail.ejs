@@ -5,7 +5,7 @@
                 <div class="avatar">
                     <img
                         src="https://styles.redditmedia.com/t5_2qhsa/styles/communityIcon_zp89zqe7cdlb1.png?width=128&frame=1&auto=webp&s=0fc12bdbd19074cf90bfc593e72ecdac285402fc">
-                    <a href="#">@<%= post.username %></a>
+                    <a href="#">@<%= post.owner.username %></a>
                     <p>7 hr. ago</p>
                 </div>
                 <div class="post-head-tool">
@@ -37,17 +37,20 @@
                 <div class="comments">
                     <i class="fa-regular fa-comment"></i>
                 </div>
-                <div class="share">
-                    <a href="/posts/<%= post.id %>/edit">
-                        <i class="fa-solid fa-share"></i>
-                        Edit
-                    </a>
-                </div>
-                <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
-                    <div class="delete">
-                        <button><i class="fa-regular fa-trash-can"></i>Delete</button>
+                <% if(currUser && post.owner._id.equals(currUser._id)) {%>
+                    <div class="share">
+                        <a href="/posts/<%= post.id %>/edit">
+                            <i class="fa-solid fa-share"></i>
+                            Edit
+                        </a>
                     </div>
-                </form>
+                    <form action="/posts/<%= post.id %>?_method=DELETE" method="post">
+                        <div class="delete">
+                            <button><i class="fa-regular fa-trash-can"></i>Delete</button>
+                        </div>
+                    </form>
+                <% } %>
+
             </div>
             <div class="comment-section mb-4">
                 <form method="POST" action="/posts/<%= post.id %>/comments">
@@ -71,7 +74,8 @@
                                 <%= content.comment %>
                             </p>
                             <!-- "/posts/:id/comments/:commentId", -->
-                            <form action="/posts/<%= post.id %>/comments/<%= content._id %>?_method=DELETE" method="POST">
+                            <form action="/posts/<%= post.id %>/comments/<%= content._id %>?_method=DELETE"
+                                method="POST">
                                 <button class="btn btn-danger">Delete</button>
                             </form>
                         </div>
