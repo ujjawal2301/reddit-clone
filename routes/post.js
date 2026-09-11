@@ -3,20 +3,8 @@ const router = express.Router();
 const Post = require("../models/posts");
 const Comment = require("../models/comments");
 const wrapAsync = require("../utils/wrapAsync");
-const ExpressError = require("../utils/ExpressError");
-const { postSchema } = require("../schema");
-const { isLoggedIn } = require("../middleware");
 
-
-const validatePost = (req, res, next) => {
-    let { error } = postSchema.validate(req.body);
-    if (error) {
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
-    } else {
-        next();
-    }
-}
+const { isLoggedIn, isOwner,validatePost } = require("../middleware");
 
 // Index Route
 router.get("/", wrapAsync(async (req, res) => {
@@ -31,7 +19,6 @@ router.get("/new", isLoggedIn, (req, res) => {
 
 // Create Route
 router.post("/", isLoggedIn, validatePost, wrapAsync(async (req, res) => {
-    // await Post.insertOne({ ...req.body.post });
     const newPost = new Post(req.body.post);
     newPost.owner = req.user._id;
     await newPost.save();
@@ -39,13 +26,6 @@ router.post("/", isLoggedIn, validatePost, wrapAsync(async (req, res) => {
     res.redirect("/posts");
 }));
 
-// Update Route
-router.patch("/:id", isLoggedIn, validatePost, wrapAsync(async (req, res) => {
-    let { id } = req.params;
-    await Post.findByIdAndUpdate(id, { ...req.body.post });
-    req.flash("success", "Post Updated!");
-    res.redirect(`/posts/${id}`);
-}));
 
 // Edit Route
 router.get("/:id/edit", isLoggedIn, wrapAsync(async (req, res) => {
@@ -67,8 +47,16 @@ router.get("/:id", wrapAsync(async (req, res) => {
         req.flash("error", "Post does not Exist");
         return res.redirect("/posts");
     }
-    // console.log(post.comments);
     res.render("Pages/detail.ejs", { post });
+}));
+
+
+// Update Route
+router.put("/:id", isLoggedIn,isOwner, validatePost, wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    await Post.findByIdAndUpdate(id, { ...req.body.post });
+    req.flash("success", "Post Updated!");
+    res.redirect(`/posts/${id}`);
 }));
 
 // Delete Route
