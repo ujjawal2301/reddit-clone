@@ -1,4 +1,6 @@
 const ExpressError = require("./utils/ExpressError");
+const Post = require("./models/posts");
+const Comment = require("./models/comments");
 const { commentSchema, postSchema } = require("./schema");
 
 module.exports.isLoggedIn = (req, res, next) => {
@@ -45,4 +47,14 @@ module.exports.validateComment = (req, res, next) => {
     } else {
         next();
     }
+}
+
+module.exports.isCommentAuthor = async (req, res, next) => {
+    let { id, commentId } = req.params;
+    let comment = await Comment.findById(commentId);
+    if (!comment.author.equals(res.locals.currUser.id)) {
+        req.flash("error", "You don't have permission to delete this review");
+        return res.redirect(`/posts/${id}`);
+    }
+    next();
 }

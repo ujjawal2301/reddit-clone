@@ -4,7 +4,7 @@ const Post = require("../models/posts");
 const Comment = require("../models/comments");
 const wrapAsync = require("../utils/wrapAsync");
 
-const { isLoggedIn, isOwner,validatePost } = require("../middleware");
+const { isLoggedIn, isOwner, validatePost } = require("../middleware");
 
 // Index Route
 router.get("/", wrapAsync(async (req, res) => {
@@ -26,9 +26,8 @@ router.post("/", isLoggedIn, validatePost, wrapAsync(async (req, res) => {
     res.redirect("/posts");
 }));
 
-
 // Edit Route
-router.get("/:id/edit", isLoggedIn, wrapAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
     let post = await Post.findById(id).populate("owner");
     if (!post) {
@@ -41,7 +40,7 @@ router.get("/:id/edit", isLoggedIn, wrapAsync(async (req, res) => {
 // View Route
 router.get("/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    let post = await Post.findById(id).populate("comments").populate("owner");
+    let post = await Post.findById(id).populate({path: "comments", populate: { path: "author"}}).populate("owner");
     console.log(post);
     if (!post) {
         req.flash("error", "Post does not Exist");
@@ -50,9 +49,8 @@ router.get("/:id", wrapAsync(async (req, res) => {
     res.render("Pages/detail.ejs", { post });
 }));
 
-
 // Update Route
-router.put("/:id", isLoggedIn,isOwner, validatePost, wrapAsync(async (req, res) => {
+router.put("/:id", isLoggedIn, isOwner, validatePost, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Post.findByIdAndUpdate(id, { ...req.body.post });
     req.flash("success", "Post Updated!");
@@ -60,7 +58,7 @@ router.put("/:id", isLoggedIn,isOwner, validatePost, wrapAsync(async (req, res) 
 }));
 
 // Delete Route
-router.delete("/:id", isLoggedIn, wrapAsync(async (req, res) => {
+router.delete("/:id", isLoggedIn, isOwner, wrapAsync(async (req, res) => {
     let { id } = req.params;
     await Comment.findByIdAndUpdate(id, { $pull: { comments: id } });
     let deletedPost = await Post.findByIdAndDelete(id);
